@@ -176,7 +176,7 @@ def download_file(url, force=False, block_size=65536, timeout=10):
                     logger.info('done')
 
             except BaseException:
-
+                remote.close()
                 file_handler.close()
 
                 if os.path.exists(filename):
@@ -184,6 +184,7 @@ def download_file(url, force=False, block_size=65536, timeout=10):
 
                 raise
 
+        remote.close()
         _temp_files[url] = filename
 
     # URL is cached, obtain physical location of file on disk
